@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>SCOUT Platform</title>
+  <style>
+    :root{--green:#c0f070;--ink:#111;--muted:#6d6d6d;--bg:#f5f5f5}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+    .wrap{max-width:1050px;margin:auto;padding:36px 20px 60px}
+    .brand{font-size:27px;font-weight:950;letter-spacing:-1px}
+    .brand span{color:#6d9f35}
+    h1{font-size:48px;line-height:.98;letter-spacing:-2px;margin:24px 0 12px;max-width:760px}
+    .lead{color:var(--muted);font-size:16px;line-height:1.55;max-width:710px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+    .card{background:white;border:1px solid #e8e8e8;border-radius:22px;padding:22px}
+    .icon{font-size:36px}
+    .card h2{font-size:21px;margin:13px 0 7px}
+    .card p{font-size:13px;line-height:1.5;color:#666;min-height:78px}
+    a{display:block;text-decoration:none;background:#000;color:#fff;border-radius:13px;padding:13px;text-align:center;font-weight:900;margin-top:16px}
+    .card:nth-child(1) a,.card:nth-child(2) a{background:var(--green);color:#000}
+    .note{margin-top:24px;background:#fff;border-radius:16px;padding:14px 16px;border:1px solid #e8e8e8;color:#555;font-size:12px;line-height:1.5}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}h1{font-size:36px}.card p{min-height:0}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">SCOUT <span>Platform</span></div>
+  <h1>On-demand staffing, split into three connected experiences.</h1>
+  <p class="lead">Use the links below to test the Business app, Worker app and Website/Admin platform. These are currently static prototypes for UX and workflow testing.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🏢</div>
+      <h2>SCOUT Business</h2>
+      <p>Post vacancies, select awards and classifications, dispatch workers, review applicants, appoint, complete WHS, approve timesheets and manage payments.</p>
+      <a href="./business/">Open Business</a>
+    </div>
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h2>SCOUT Worker</h2>
+      <p>Manage onboarding, availability, shift alerts, WHS, check-in, timesheets, earnings, certifications and worker profile information.</p>
+      <a href="./worker/">Open Worker</a>
+    </div>
+    <div class="card">
+      <div class="icon">🖥️</div>
+      <h2>SCOUT Website + Admin</h2>
+      <p>Public website plus Operations Centre, Candidate Compliance Vault, dispatch, incidents, payments, payroll, support and reporting.</p>
+      <a href="./admin/">Open Website/Admin</a>
+    </div>
+  </div>
+
+  <div class="note"><b>Current stage:</b> prototype/UAT. GitHub Pages will host these front-end files, but secure login, document storage, payments, notifications and live database functions still require a backend later.</div>
+</div>
+</body>
+</html>
