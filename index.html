@@ -2,58 +2,212 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#111111">
-  <title>SCOUT Platform</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#061a13">
+  <title>SCOUT — On-demand staffing</title>
   <style>
-    :root{--green:#c0f070;--ink:#111;--muted:#6d6d6d;--bg:#f5f5f5}
+    :root{
+      --bg:#061a13;
+      --bg2:#08241a;
+      --panel:#0b2a1f;
+      --line:rgba(192,240,112,.16);
+      --green:#c0f070;
+      --green2:#9fd94f;
+      --text:#fff;
+      --muted:#b7c3bd;
+    }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
-    .wrap{max-width:1050px;margin:auto;padding:36px 20px 60px}
-    .brand{font-size:27px;font-weight:950;letter-spacing:-1px}
-    .brand span{color:#6d9f35}
-    h1{font-size:48px;line-height:.98;letter-spacing:-2px;margin:24px 0 12px;max-width:760px}
-    .lead{color:var(--muted);font-size:16px;line-height:1.55;max-width:710px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
-    .card{background:white;border:1px solid #e8e8e8;border-radius:22px;padding:22px}
-    .icon{font-size:36px}
-    .card h2{font-size:21px;margin:13px 0 7px}
-    .card p{font-size:13px;line-height:1.5;color:#666;min-height:78px}
-    a{display:block;text-decoration:none;background:#000;color:#fff;border-radius:13px;padding:13px;text-align:center;font-weight:900;margin-top:16px}
-    .card:nth-child(1) a,.card:nth-child(2) a{background:var(--green);color:#000}
-    .note{margin-top:24px;background:#fff;border-radius:16px;padding:14px 16px;border:1px solid #e8e8e8;color:#555;font-size:12px;line-height:1.5}
-    @media(max-width:760px){.grid{grid-template-columns:1fr}h1{font-size:36px}.card p{min-height:0}}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 50% -10%,rgba(192,240,112,.08),transparent 28%),
+        linear-gradient(180deg,#04120d 0%,var(--bg) 48%,#04140e 100%);
+      min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit}
+    button{font:inherit}
+    .shell{max-width:1240px;margin:auto;padding:0 24px 34px}
+    header{
+      min-height:82px;
+      display:flex;align-items:center;justify-content:space-between;gap:26px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-size:25px;font-weight:950;letter-spacing:-.8px}
+    .brand img{width:48px;height:48px;border-radius:12px;display:block}
+    nav{display:flex;gap:28px;align-items:center;font-size:12px;font-weight:750}
+    nav a{color:#e8eeeb;opacity:.88;transition:.2s}
+    nav a:hover{color:var(--green);opacity:1}
+    .admin{
+      border:1px solid rgba(192,240,112,.58);
+      color:var(--green);
+      padding:11px 15px;border-radius:12px;font-size:11px;font-weight:900;
+      transition:.18s;
+    }
+    .admin:hover{background:var(--green);color:#07140f}
+    .hero{text-align:center;padding:46px 16px 28px}
+    .eyebrow{font-size:10px;letter-spacing:2px;color:var(--green);font-weight:900;text-transform:uppercase}
+    h1{
+      font-size:58px;line-height:.98;letter-spacing:-2.4px;
+      margin:13px auto 14px;max-width:850px;
+    }
+    h1 span{color:var(--green)}
+    .hero p{max-width:720px;margin:0 auto;color:var(--muted);font-size:15px;line-height:1.6}
+    .split{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;
+    }
+    .audience{
+      min-height:620px;border:1px solid var(--line);border-radius:26px;
+      overflow:hidden;position:relative;background-size:cover;background-position:center;
+      display:flex;align-items:flex-end;isolation:isolate;
+      transition:transform .25s ease,border-color .25s ease;
+    }
+    .audience:hover{transform:translateY(-3px);border-color:rgba(192,240,112,.45)}
+    .audience:before{
+      content:"";position:absolute;inset:0;z-index:-1;
+      background:linear-gradient(180deg,rgba(0,0,0,.04) 10%,rgba(3,20,14,.18) 38%,rgba(4,24,17,.96) 88%);
+    }
+    .audience.worker:before{
+      background:linear-gradient(180deg,rgba(0,0,0,.03) 10%,rgba(0,35,25,.2) 38%,rgba(3,37,27,.97) 88%);
+    }
+    .content{padding:30px 34px 32px;width:100%}
+    .mini-logo{
+      width:58px;height:58px;border-radius:16px;background:rgba(4,22,15,.92);
+      display:grid;place-items:center;border:1px solid rgba(192,240,112,.24);margin-bottom:18px;
+    }
+    .mini-logo img{width:43px;height:43px;border-radius:10px}
+    .audience h2{font-size:38px;line-height:1;margin:0 0 10px;letter-spacing:-1.1px}
+    .audience h2 span{color:var(--green)}
+    .audience p{color:#d7dfdb;font-size:14px;line-height:1.55;max-width:470px;margin:0}
+    .benefits{margin:22px 0;display:grid;gap:11px;border-top:1px solid rgba(192,240,112,.18);padding-top:20px}
+    .benefit{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:720}
+    .benefit i{
+      width:29px;height:29px;border:1px solid rgba(192,240,112,.65);
+      border-radius:50%;display:grid;place-items:center;font-style:normal;color:var(--green);font-size:12px;
+    }
+    .cta{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      width:100%;min-height:56px;border-radius:14px;background:var(--green);
+      color:#07140f;font-size:14px;font-weight:950;transition:.18s;
+    }
+    .cta:hover{background:#cffb86;transform:translateY(-1px)}
+    .learn{display:block;text-align:center;margin-top:13px;color:var(--green);font-size:11px;font-weight:850}
+    .trust{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+      margin-top:16px;border:1px solid var(--line);border-radius:22px;
+      background:rgba(11,42,31,.72);overflow:hidden;
+    }
+    .trust-item{
+      padding:20px;display:flex;align-items:flex-start;gap:12px;
+      border-right:1px solid rgba(255,255,255,.07);
+    }
+    .trust-item:last-child{border-right:0}
+    .trust-icon{
+      width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+      color:var(--green);border:1px solid rgba(192,240,112,.32);font-size:17px;flex:none;
+    }
+    .trust b{font-size:11px;display:block;margin-bottom:3px}
+    .trust span{font-size:9px;color:#9eadA6;line-height:1.4;display:block}
+    footer{text-align:center;padding:30px 10px 8px;color:#89988f;font-size:10px}
+    footer b{color:var(--green)}
+    .mobile-menu{display:none}
+
+    @media(max-width:860px){
+      nav{display:none}
+      h1{font-size:46px}
+      .split{grid-template-columns:1fr}
+      .audience{min-height:570px}
+      .trust{grid-template-columns:1fr 1fr}
+      .trust-item:nth-child(2){border-right:0}
+      .trust-item:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.07)}
+    }
+    @media(max-width:560px){
+      .shell{padding:0 12px 22px}
+      header{min-height:68px}
+      .brand{font-size:20px}.brand img{width:40px;height:40px}
+      .admin{padding:9px 11px;font-size:9px}
+      .hero{text-align:left;padding:30px 5px 18px}
+      h1{font-size:40px;letter-spacing:-1.6px}
+      .hero p{font-size:13px}
+      .audience{min-height:530px;border-radius:21px}
+      .content{padding:24px 22px}
+      .audience h2{font-size:33px}
+      .audience p{font-size:12px}
+      .trust{grid-template-columns:1fr}
+      .trust-item,.trust-item:nth-child(2){border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}
+      .trust-item:last-child{border-bottom:0}
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="brand">SCOUT <span>Platform</span></div>
-  <h1>On-demand staffing, split into three connected experiences.</h1>
-  <p class="lead">Use the links below to test the Business app, Worker app and Website/Admin platform. These are currently static prototypes for UX and workflow testing.</p>
+  <div class="shell">
+    <header>
+      <a class="brand" href="./">
+        <img src="./assets/scout-logo.png" alt="SCOUT logo">
+        <span>SCOUT</span>
+      </a>
+      <nav>
+        <a href="#how">How it works</a>
+        <a href="./business/">For Businesses</a>
+        <a href="./worker/">For Workers</a>
+        <a href="#why">Why SCOUT</a>
+        <a href="mailto:hello@scout.example">Contact</a>
+      </nav>
+      <a class="admin" href="./admin/">🔒 Admin Login</a>
+    </header>
 
-  <div class="grid">
-    <div class="card">
-      <div class="icon">🏢</div>
-      <h2>SCOUT Business</h2>
-      <p>Post vacancies, select awards and classifications, dispatch workers, review applicants, appoint, complete WHS, approve timesheets and manage payments.</p>
-      <a href="./business/">Open Business</a>
-    </div>
-    <div class="card">
-      <div class="icon">⚡</div>
-      <h2>SCOUT Worker</h2>
-      <p>Manage onboarding, availability, shift alerts, WHS, check-in, timesheets, earnings, certifications and worker profile information.</p>
-      <a href="./worker/">Open Worker</a>
-    </div>
-    <div class="card">
-      <div class="icon">🖥️</div>
-      <h2>SCOUT Website + Admin</h2>
-      <p>Public website plus Operations Centre, Candidate Compliance Vault, dispatch, incidents, payments, payroll, support and reporting.</p>
-      <a href="./admin/">Open Website/Admin</a>
-    </div>
+    <section class="hero" id="how">
+      <div class="eyebrow">On-demand staffing</div>
+      <h1>The smarter way to <span>work.</span></h1>
+      <p>SCOUT connects businesses with screened, available workers in real time. Fast for businesses. Flexible for workers. Better for everyone.</p>
+    </section>
+
+    <section class="split">
+      <article class="audience business" style="background-image:url('./assets/business-owner.webp')">
+        <div class="content">
+          <div class="mini-logo"><img src="./assets/scout-logo.png" alt=""></div>
+          <h2>Looking to <span>Hire?</span></h2>
+          <p>Post a vacancy, reach screened local workers and get shifts filled quickly.</p>
+          <div class="benefits">
+            <div class="benefit"><i>⚡</i>Post a vacancy in minutes</div>
+            <div class="benefit"><i>⌖</i>Connect with nearby, available workers</div>
+            <div class="benefit"><i>✓</i>Manage WHS, compliance and payments</div>
+            <div class="benefit"><i>◉</i>See applications and dispatch updates live</div>
+          </div>
+          <a class="cta" href="./business/">I'm Looking to Hire <span>→</span></a>
+          <a class="learn" href="./business/">Open SCOUT Business →</a>
+        </div>
+      </article>
+
+      <article class="audience worker" style="background-image:url('./assets/cafe-worker.webp')">
+        <div class="content">
+          <div class="mini-logo"><img src="./assets/scout-logo.png" alt=""></div>
+          <h2>Looking for <span>Work?</span></h2>
+          <p>Find flexible Hospitality and Administration shifts that fit your availability and location.</p>
+          <div class="benefits">
+            <div class="benefit"><i>⌕</i>Find available shifts near you</div>
+            <div class="benefit"><i>▣</i>Choose when and where you work</div>
+            <div class="benefit"><i>$</i>Track shifts, timesheets and earnings</div>
+            <div class="benefit"><i>✓</i>Build a verified SCOUT worker profile</div>
+          </div>
+          <a class="cta" href="./worker/">I'm Looking for Work <span>→</span></a>
+          <a class="learn" href="./worker/">Open SCOUT Worker →</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="trust" id="why">
+      <div class="trust-item"><div class="trust-icon">✓</div><div><b>Verified & screened</b><span>Worker identity, screening and compliance status in one place.</span></div></div>
+      <div class="trust-item"><div class="trust-icon">🦺</div><div><b>WHS built in</b><span>Business and worker safety readiness before the shift starts.</span></div></div>
+      <div class="trust-item"><div class="trust-icon">⚡</div><div><b>Real-time matching</b><span>Nearby candidate dispatch designed around fast short-term staffing.</span></div></div>
+      <div class="trust-item"><div class="trust-icon">👋</div><div><b>SCOUT support</b><span>Escalation to a SCOUT Consultant when automated dispatch needs help.</span></div></div>
+    </section>
+
+    <footer>
+      Proudly connecting local businesses and local workers.<br><b>Real people. Real shifts. Real impact.</b>
+    </footer>
   </div>
-
-  <div class="note"><b>Current stage:</b> prototype/UAT. GitHub Pages will host these front-end files, but secure login, document storage, payments, notifications and live database functions still require a backend later.</div>
-</div>
 </body>
 </html>
-
