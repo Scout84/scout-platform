@@ -69,15 +69,8 @@
       content:"";position:absolute;inset:0;z-index:-1;
       background:linear-gradient(180deg,rgba(0,0,0,.04) 10%,rgba(3,20,14,.18) 38%,rgba(4,24,17,.96) 88%);
     }
-    .audience.worker:before{
-      background:linear-gradient(180deg,rgba(0,0,0,.03) 10%,rgba(0,35,25,.2) 38%,rgba(3,37,27,.97) 88%);
-    }
+    .audience.worker:before{background:linear-gradient(180deg,rgba(0,0,0,.04) 10%,rgba(3,20,14,.18) 38%,rgba(4,24,17,.96) 88%);}
     .content{padding:30px 34px 32px;width:100%}
-    .mini-logo{
-      width:58px;height:58px;border-radius:16px;background:rgba(4,22,15,.92);
-      display:grid;place-items:center;border:1px solid rgba(192,240,112,.24);margin-bottom:18px;
-    }
-    .mini-logo img{width:43px;height:43px;border-radius:10px}
     .audience h2{font-size:38px;line-height:1;margin:0 0 10px;letter-spacing:-1.1px}
     .audience h2 span{color:var(--green)}
     .audience p{color:#d7dfdb;font-size:14px;line-height:1.55;max-width:470px;margin:0}
@@ -167,7 +160,6 @@
     <section class="split">
       <article class="audience business" style="background-image:url('./assets/business-owner.webp')">
         <div class="content">
-          <div class="mini-logo"><img src="./assets/scout-logo.png" alt=""></div>
           <h2>Looking to <span>Hire?</span></h2>
           <p>Post a vacancy, reach screened local workers and get shifts filled quickly.</p>
           <div class="benefits">
@@ -183,7 +175,6 @@
 
       <article class="audience worker" style="background-image:url('./assets/cafe-worker.webp')">
         <div class="content">
-          <div class="mini-logo"><img src="./assets/scout-logo.png" alt=""></div>
           <h2>Looking for <span>Work?</span></h2>
           <p>Find flexible Hospitality and Administration shifts that fit your availability and location.</p>
           <div class="benefits">
@@ -211,3 +202,38 @@
   </div>
 </body>
 </html>
+
+
+<!-- SCOUT panel harmonisation -->
+<style>
+.audience.business,
+.audience.worker,
+.audience-card.business,
+.audience-card.worker{
+  border-color:rgba(192,240,112,.42)!important;
+}
+.audience.business:before,
+.audience.worker:before,
+.audience-card.business:before,
+.audience-card.worker:before{
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,.04) 8%,
+    rgba(3,20,14,.20) 38%,
+    rgba(5,42,26,.96) 90%
+  )!important;
+}
+.audience.business .cta,
+.audience.worker .cta,
+.audience-card.business .audience-cta,
+.audience-card.worker .audience-cta{
+  background:#c0f070!important;
+  color:#07140f!important;
+}
+.audience.business h2 span,
+.audience.worker h2 span,
+.audience-card.business h2 em,
+.audience-card.worker h2 em{
+  color:#c0f070!important;
+}
+</style>
